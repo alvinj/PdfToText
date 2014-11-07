@@ -8,7 +8,7 @@ class BetterLookingTextField(numColumns: Int) extends JTextField(numColumns: Int
     this.setFont(getFont.deriveFont(16.0f))
     this.setBorder(BorderFactory.createCompoundBorder(getBorder, BorderFactory.createEmptyBorder(5, 12, 5, 5)))
     //this.setBounds(20, 20, getHeight, getWidth)
-    this.setBackground(new Color(250, 250, 250))
+    this.setBackground(Color.WHITE)
 }
 
 

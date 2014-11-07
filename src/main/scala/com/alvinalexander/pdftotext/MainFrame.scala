@@ -68,6 +68,7 @@ class MainFrame extends JFrame {
         outputArea.setEditable(false)
         outputArea.setMargin(new Insets(20, 20, 20, 20))
         outputArea.setFont(new Font("Monaco", Font.PLAIN, 13))
+        outputArea.setBackground(new Color(250, 250, 250))
     }
 
 }

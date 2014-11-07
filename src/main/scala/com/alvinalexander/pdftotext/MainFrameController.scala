@@ -29,16 +29,24 @@ class MainFrameController {
     val filenameField = mainFrame.filenameField
     val outputArea = mainFrame.outputArea
     val goButton = mainFrame.goButton
-    goButton.addActionListener(new GoButtonListener(this))
     
     // wait dialog
     val waitDialog = new JDialog(mainFrame, "Progress Dialog", true)
     configureWaitDialog
+    configureActionListeners
     
     def start(pdfReader: ActorRef) {
         this.pdfReader = pdfReader
         mainFrame.setLocationRelativeTo(null)
         mainFrame.setVisible(true)
+    }
+    
+    private def configureActionListeners {
+        val goListener = new GoButtonListener(this)
+        goButton.addActionListener(goListener)
+        filenameField.addActionListener(goListener)
+        pageStartField.addActionListener(goListener)
+        pageEndField.addActionListener(goListener)
     }
 
     private def configureWaitDialog {
@@ -74,6 +82,7 @@ class MainFrameController {
             val filename = filenameField.getText
             // tell the reader to read the pdf; it calls us back when it's done.
             showWaitDialog
+            outputArea.setText("")
             pdfReader ! ReadFile(filename: String, startPage: Int, endPage: Int)
         } catch {
             case t: Throwable => 
