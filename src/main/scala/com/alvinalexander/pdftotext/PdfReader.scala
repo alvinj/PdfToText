@@ -4,6 +4,8 @@ import akka.actor._
 import java.io.File
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.util.PDFTextStripper
+import java.io.StringWriter
+import java.io.PrintWriter
 
 case class ReadFile(filename: String, startPage: Int, endPage: Int)
 case class HeresTheContent(content: String)
@@ -37,13 +39,18 @@ class PdfReaderHelper extends Actor {
     }
 
     def getPdfContent(filename: String, startPage: Int, endPage: Int): String = {
-        val pdf = PDDocument.load(new File(filename))
-        val stripper = new PDFTextStripper
-        stripper.setStartPage(startPage)
-        stripper.setEndPage(endPage)
-        stripper.getText(pdf)    
-  }
-
+        try {
+            val pdf = PDDocument.load(new File(filename))
+            val stripper = new PDFTextStripper
+            stripper.setStartPage(startPage)
+            stripper.setEndPage(endPage)
+            stripper.getText(pdf)
+        } catch {
+            case t: Throwable => 
+                s"There was an error trying to read the PDF file. Here's the exception:\n${Utils.getStackTraceAsString(t)}"
+        }
+    }
+    
 }
 
 

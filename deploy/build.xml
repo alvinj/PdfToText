@@ -1,4 +1,4 @@
-<project name="PDFToText" default="create-bundle" basedir=".">
+<project name="PdfToText" default="create-bundle" basedir=".">
 
     <!-- assumes appbundler-1.0.jar is in the current dir -->
     <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="appbundler-1.0.jar" />
@@ -17,7 +17,7 @@
         <!-- just needed for the first-time setup -->
         <mkdir dir="${release.dir}"/>
         <!-- remove old versions -->
-        <delete dir="${release.dir}/PDFToText.app" />
+        <delete dir="${release.dir}/PdfToText.app" />
     </target>
 
     <!-- CREATE MAC BUNDLE (new for Java7+) -->
@@ -29,7 +29,7 @@
             displayname="PdfToText"
             identifier="com.alvinalexander.pdftotext.PdfToText"
             shortversion="1.0"
-            icon="Hyde.icns"
+            icon="PdfToTextIcon.icns"
             copyright="Alvin Alexander"
             applicationCategory="public.app-category.utilities"
             mainclassname="com/alvinalexander/pdftotext/PdfToText">
@@ -40,17 +40,20 @@
             <!-- use 'argument' here? see Info.plist, it has VMOptions and VMArguments -->
 
             <!-- jvm settings -->
+            <!-- don't use these, the app was crashing with them (like an out of memory crash) -->
+            <!--
             <option value="-Xms32m"/>
             <option value="-Xmx256m"/>
             <option value="-XX:PermSize=20m"/>
             <option value="-XX:MaxPermSize=20m"/>
+            -->
 
             <!-- per http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html -->
             <!-- "use cms for desktop ui" -->
             <option value="-XX:+UseConcMarkSweepGC"/>
             <option value="-XX:ParallelCMSThreads=2"/>
 
-            <option value="-Xdock:icon=Contents/Resources/Hyde.icns"/>
+            <option value="-Xdock:icon=Contents/Resources/PdfToTextIcon.icns"/>
             <option value="-Dapple.laf.useScreenMenuBar=true"/>
             <option value="-Dcom.apple.macos.use-file-dialog-packages=true"/>
             <option value="-Dcom.apple.macos.useScreenMenuBar=true"/>

@@ -2,6 +2,7 @@ package com.alvinalexander.pdftotext
 
 import akka.actor.ActorSystem
 import akka.actor.Props
+import javax.swing.JOptionPane
 
 /**
  * -----------------------------------------------
@@ -17,7 +18,17 @@ import akka.actor.Props
     // TODO it's a poor design choice to pass the controller to the PdfReader like this
     val pdfReader = system.actorOf(Props(new PdfReader(controller)), name = "PdfReader")
 
-    controller.start(pdfReader)
+    try {
+        controller.start(pdfReader)
+    } catch {
+        case t: Throwable => 
+            JOptionPane.showMessageDialog(
+                null,
+                Utils.getStackTraceAsString(t),
+                "Error",
+                JOptionPane.ERROR_MESSAGE)  
+    }
+    
 
 }
 
