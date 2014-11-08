@@ -10,16 +10,21 @@ import java.awt.event.ActionEvent
 
 class MainFrame extends JFrame {
 
-    val filenameLabel = new JLabel("PDF Filename:")
-    val pageStartLabel = new JLabel("Start Page: ")
-    val pageEndLabel = new JLabel("End Page: ")
-    val outputLabel = new JLabel("Output")
+    val filenameLabel = new BetterJLabel("PDF Filename:")
+    val pageStartLabel = new BetterJLabel("Start Page: ")
+    val pageEndLabel = new BetterJLabel("End Page: ")
+    val outputLabel = new BetterJLabel("Output")
     val pageStartField = new BetterLookingTextField(4)
     val pageEndField = new BetterLookingTextField(4)
     val filenameField = new BetterLookingTextField(40)
     val outputArea = new JEditorPane
     val scrollPane = new JScrollPane(outputArea)
     val goButton = new JButton("Go")
+    
+    // can get the "system font" like this
+    //val ff = outputArea.getFont.getFamily
+    goButton.setPreferredSize(new Dimension(82, 36))
+    goButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15))
 
     filenameField.setText("/Users/al/Desktop/Scala-Cookbook.pdf")
     pageStartField.setText("22")
@@ -71,6 +76,10 @@ class MainFrame extends JFrame {
         outputArea.setBackground(new Color(250, 250, 250))
     }
 
+}
+
+class BetterJLabel(text: String) extends JLabel(text: String) {
+    setFont(new Font("Lucida Grande", Font.PLAIN, 14))
 }
 
 
