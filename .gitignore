@@ -14,3 +14,4 @@ deploy/**/*.jar
 deploy/release/
 lib.old
 *.log
+pdftotext.sh.jar
