@@ -18,7 +18,7 @@ object PdfToText {
         val filename = args(2)
 
         // sanity check
-        if (endPage < startPage) printUsageAndExit
+        if (startPage > endPage) printUsageAndExit
 
         println(getTextFromPdf(startPage, endPage, filename))
     }
@@ -26,7 +26,7 @@ object PdfToText {
     def printUsageAndExit {
         println("")
         println("Usage: pdftotext startPage endPage filename")
-        println("       (startPage is assumed to be >= than endPage)")
+        println("       (startPage must be <= endPage)")
         System.exit(1)
     }
 
